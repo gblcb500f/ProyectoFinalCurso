@@ -1,0 +1,22 @@
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'passwd' cannot be null0.72912500 1585176160
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'passwd' cannot be null0.09499400 1585176203
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1234567B' for key 'PRIMARY'0.96452500 1585219288
+SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+0.58808300 1586350400
+SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+0.66890700 1586350404
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.83317900 1586370577
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.36180800 1586370651
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.59789300 1586370703
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.37378900 1586370852
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.93898300 1586370921
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.40329000 1586370967
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.76175500 1586371038
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.68160700 1586373601
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.93023400 1586512211
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1234567Z' for key 'PRIMARY'0.73316300 1586523185
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.30221600 1586523416
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.25490600 1586527712
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.51493000 1586527743
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.36334300 1586527810
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.31323600 1586535295

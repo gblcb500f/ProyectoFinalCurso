@@ -1,0 +1,37 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+p{
+    color: rgb(235, 238, 238);
+}
+main{
+background-color: #232323;
+}
+form{
+    margin-top: 100px;
+}
+.contacto{
+    background-color: #c02938;
+    width: auto;
+    height: 80px;
+    border-radius: 15px;
+}
+.espacioLateralIzquierdo{
+    margin-left: 100px;
+}
+.contenedorInfo{
+    background-color: #c02938;
+    width: auto;
+    height: auto;
+    border-radius: 15px;
+}
+.fullHeight {
+    min-height: 100vh;
+}
+#eventos {
+    height: 250px;
+    overflow: scroll;
+}
