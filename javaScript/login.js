@@ -58,13 +58,4 @@ function ValidarCampos() {
             $("#Error").css("color", "red");
         }
     }
-
-    function campoVacio(campo) {
-        $("#textError").append(`<p id='Error'>Lo sentimos el campo ${campo} esta vacio, se debe rellenar</p>`);
-        $("#Error").css("color", "red");
-    }
-    function ErrorValidacion(campo, validacion) {
-        $("#textError").append(`<p id='Error'>Lo sentimos el campo ${campo} no es corecto tiene que tener: <br> ${validacion}</p>`);
-        $("#Error").css("color", "red");
-    }
 }

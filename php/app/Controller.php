@@ -3,7 +3,7 @@ include('libs/utils.php');
 
 class Controller
 {
-
+/* --------------------------------------------------------------------------------------------------------------------------- */
     public function home()
     {
         require __DIR__ . '/templates/home.php';
@@ -73,70 +73,64 @@ class Controller
     }
     public function SubirImgPersona()
     {
-     
+
         if ($_FILES) {
             foreach ($_FILES as $file) {
                 if ($file["error"] == UPLOAD_ERR_OK) {
                     // movemos el archivo a la carpeta donde se encuentra este archivo  
-                    move_uploaded_file($file["tmp_name"], Config::$dir_persona.'/'.$file["name"]);
-                   $valor=Config::$dir_persona.'/'.$file["name"];
-
+                    move_uploaded_file($file["tmp_name"], Config::$dir_persona . '/' . $file["name"]);
+                    $valor = Config::$dir_persona . '/' . $file["name"];
                 }
             }
-            
         } else {
 
-            $valor=false;
+            $valor = false;
 
             $ok = 0;
         }
         # devolvemos un json con la información
         echo $valor;
-    } 
+    }
     public function SubirImgMarca()
     {
-     
+
         if ($_FILES) {
             foreach ($_FILES as $file) {
                 if ($file["error"] == UPLOAD_ERR_OK) {
                     // movemos el archivo a la carpeta donde se encuentra este archivo  
-                    move_uploaded_file($file["tmp_name"], Config::$dir_marca.'/'.$file["name"]);
-                   $valor=Config::$dir_marca.'/'.$file["name"];
-
+                    move_uploaded_file($file["tmp_name"], Config::$dir_marca . '/' . $file["name"]);
+                    $valor = Config::$dir_marca . '/' . $file["name"];
                 }
             }
-            
         } else {
 
-            $valor=false;
+            $valor = false;
 
             $ok = 0;
         }
         # devolvemos un json con la información
         echo $valor;
-    } 
+    }
     public function SubirImgProducto()
     {
-     
+
         if ($_FILES) {
             foreach ($_FILES as $file) {
                 if ($file["error"] == UPLOAD_ERR_OK) {
                     // movemos el archivo a la carpeta donde se encuentra este archivo  
-                    move_uploaded_file($file["tmp_name"], Config::$dir_producto.'/'.$file["name"]);
-                   $valor=Config::$dir_producto.'/'.$file["name"];
-
+                    move_uploaded_file($file["tmp_name"], Config::$dir_producto . '/' . $file["name"]);
+                    $valor = Config::$dir_producto . '/' . $file["name"];
                 }
             }
-            
         } else {
 
-            $valor=false;
+            $valor = false;
 
             $ok = 0;
         }
         # devolvemos un json con la información
         echo $valor;
-    } 
+    }
     public function MostrarformAlt()
     {
         require __DIR__ . '/templates/formAlt.php';
@@ -236,8 +230,8 @@ class Controller
                         $params = "Lo sentimos no se pudo subir los datos en la base de datos";
                     }
                 } else {
-                    if ($BDPersona[0][0] != $dni) {
-                        if ($BDPersona[0][3] != $usuario) {
+                    if (!array_search($dni, array_column($BDPersona, 0))) {
+                        if (!array_search($usuario, array_column($BDPersona, 3))) {
                             $cont = $this->crypt_blowfish($pass);
                             if ($m->InsertarPersona($nombre, $apellido, $dni, $edad, $telefono, $email, $cp, $direccion, $provincia, $img, $usuario, $cont) && $m->InsertarUsuario($usuario, $cont)) {
                                 $params = 0;
@@ -245,7 +239,7 @@ class Controller
                                 $params = "Lo sentimos no se pudo subir los datos en la base de datos";
                             }
                         } else {
-                            $params = "Lo sentimos el usuario ya existe, tiene que tener uno distinto a los demas";
+                            $params = "Lo sentimos el usuario ya existe, tiene que tener uno distinto a los demas ";
                         }
                     } else {
                         $params = "Lo sentimos usted ya esta registrado en la base de datos";
@@ -363,7 +357,7 @@ class Controller
 
         require __DIR__ . '/templates/json.php';
     }
-
+/* -------------------------------------------------------------------------------------------------------------------------------------- */
     public function OpUsuarios()
     {
         require __DIR__ . '/templates/OpUsuarios.php';
@@ -376,6 +370,7 @@ class Controller
     {
         require __DIR__ . '/templates/Opfechas.php';
     }
+    /* ------------------------------------------------------------------------------------------------------------------------------------- */
     public function CambioPaginaModUser()
     {
         $seccion = recoge('seccion');
@@ -432,7 +427,6 @@ class Controller
 
     public function ActualizarPersona()
     {
-
         try {
             $m = new Model();
             $val = new Validacion();
@@ -446,120 +440,61 @@ class Controller
             $direccion = recoge("direccion");
             $provincia = recoge("provincia");
             $img = recoge("img");
-
-
-            if($provincia!="" && $img!=""){
-
             $usuario = recoge("usuario");
-            $valor['nombre'] = $nombre;
-            $valor['apellido'] = $apellido;
-            $valor['dni'] = $dni;
-            $valor['edad'] = $edad;
-            $valor['telefono'] = $telefono;
-            $valor['email'] = $email;
-            $valor['cp'] = $cp;
-            $valor['direccion'] = $direccion;
-            $valor['provincia'] = $provincia;
-            $valor['usuario'] = $usuario;
-            $datos = $valor;
 
-            $regla = array(
-                array(
-                    'name' => 'usuario',
-                    'regla' => 'no-empty,ValidarUsuario'
-                ),
-                array(
-                    'name' => 'email',
-                    'regla' => 'no-empty,email'
-                ),
-                array(
-                    'name' => 'nombre',
-                    'regla' => 'no-empty,ValidarTexto'
-                ),
-                array(
-                    'name' => 'apellido',
-                    'regla' => 'no-empty,ValidarTexto'
-                ),
-                array(
-                    'name' => 'provincia',
-                    'regla' => 'no-empty'
-                ),
-                array(
-                    'name' => 'dni',
-                    'regla' => 'no-empty,ValidarDni'
-                ),
-                array(
-                    'name' => 'telefono',
-                    'regla' => 'no-empty,ValidarTelefono'
-                ),
-                array(
-                    'name' => 'cp',
-                    'regla' => 'no-empty,ValidarCP'
-                ),
-                array(
-                    'name' => 'direccion',
-                    'regla' => 'no-empty,ValidarDireccion'
-                ),
-                array(
-                    'name' => 'edad',
-                    'regla' => 'no-empty,ValidarEdad'
-                )
-            );
-        }else{
-            $usuario = recoge("usuario");
-            $valor['nombre'] = $nombre;
-            $valor['apellido'] = $apellido;
-            $valor['dni'] = $dni;
-            $valor['edad'] = $edad;
-            $valor['telefono'] = $telefono;
-            $valor['email'] = $email;
-            $valor['cp'] = $cp;
-            $valor['direccion'] = $direccion;
-            $valor['usuario'] = $usuario;
-            $datos = $valor;
+                $valor['nombre'] = $nombre;
+                $valor['apellido'] = $apellido;
+                $valor['dni'] = $dni;
+                $valor['edad'] = $edad;
+                $valor['telefono'] = $telefono;
+                $valor['email'] = $email;
+                $valor['cp'] = $cp;
+                $valor['direccion'] = $direccion;
+                $valor['usuario'] = $usuario;
+                $datos = $valor;
 
-            $regla = array(
-                array(
-                    'name' => 'usuario',
-                    'regla' => 'no-empty,ValidarUsuario'
-                ),
-                array(
-                    'name' => 'email',
-                    'regla' => 'no-empty,email'
-                ),
-                array(
-                    'name' => 'nombre',
-                    'regla' => 'no-empty,ValidarTexto'
-                ),
-                array(
-                    'name' => 'apellido',
-                    'regla' => 'no-empty,ValidarTexto'
-                ),
-                array(
-                    'name' => 'dni',
-                    'regla' => 'no-empty,ValidarDni'
-                ),
-                array(
-                    'name' => 'telefono',
-                    'regla' => 'no-empty,ValidarTelefono'
-                ),
-                array(
-                    'name' => 'cp',
-                    'regla' => 'no-empty,ValidarCP'
-                ),
-                array(
-                    'name' => 'direccion',
-                    'regla' => 'no-empty,ValidarDireccion'
-                ),
-                array(
-                    'name' => 'edad',
-                    'regla' => 'no-empty,ValidarEdad'
-                )
-            );
-        }
+                $regla = array(
+                    array(
+                        'name' => 'usuario',
+                        'regla' => 'no-empty,ValidarUsuario'
+                    ),
+                    array(
+                        'name' => 'email',
+                        'regla' => 'no-empty,email'
+                    ),
+                    array(
+                        'name' => 'nombre',
+                        'regla' => 'no-empty,ValidarTexto'
+                    ),
+                    array(
+                        'name' => 'apellido',
+                        'regla' => 'no-empty,ValidarTexto'
+                    ),
+                    array(
+                        'name' => 'dni',
+                        'regla' => 'no-empty,ValidarDni'
+                    ),
+                    array(
+                        'name' => 'telefono',
+                        'regla' => 'no-empty,ValidarTelefono'
+                    ),
+                    array(
+                        'name' => 'cp',
+                        'regla' => 'no-empty,ValidarCP'
+                    ),
+                    array(
+                        'name' => 'direccion',
+                        'regla' => 'no-empty,ValidarDireccion'
+                    ),
+                    array(
+                        'name' => 'edad',
+                        'regla' => 'no-empty,ValidarEdad'
+                    )
+                );
+            
             $resultado = $val->rules($regla, $datos);
             if ($resultado === true) {
-                if ($m->ActualizarPersona($nombre, $apellido, $dni, $edad, $telefono, $email, $cp, $direccion, $provincia, $img, $usuario) && $m->InsertarUsuario($usuario, $cont)) {
+                if ($m->ActualizarPersona($nombre, $apellido, $dni, $edad, $telefono, $email, $cp, $direccion, $provincia, $img, $usuario)) {
                     $params = 0;
                 } else {
                     $params = "Lo sentimos no se pudo actualizar los datos en la base de datos";
@@ -592,6 +527,7 @@ class Controller
         }
         require __DIR__ . '/templates/json.php';
     }
+    /* ----------------------------------------------------------------------------------------------------- */
     public function PaginaMarcas()
     {
         require __DIR__ . '/templates/PaginaMarcas.php';
@@ -605,13 +541,139 @@ class Controller
         $seccion = recoge('seccion');
         require __DIR__ . '/templates/CambioPaginaModMarcas.php';
     }
-    public function PaginaMostrarMarcas(){
+    public function PaginaMostrarMarcas()
+    {
         $m = new Model();
         $alerta = recoge('alerta');
         $datos = $m->MostrarMarcas();
         require __DIR__ . '/templates/PaginaMostrarMarcas.php';
-
     }
 
-   
+    public function CrearMarcas()
+    {
+        require __DIR__ . '/templates/CrearMarcas.php';
+    }
+    public function formCrearMarcas()
+    {
+        try {
+            $m = new Model();
+            $val = new Validacion();
+            $nombre = recoge("nombre");
+            $img = recoge("img");
+            $id = recoge("id");
+            $valor['id'] = $id;
+            $valor['nombre'] = $nombre;
+            $datos = $valor;
+
+            $regla = array(
+
+                array(
+                    'name' => 'nombre',
+                    'regla' => 'no-empty,ValidarTexto'
+                ),
+                array(
+                    'name' => 'id',
+                    'regla' => 'no-empty,numeric'
+                ),
+            );
+
+            $resultado = $val->rules($regla, $datos);
+            if ($resultado === true) {
+                if ($m->CrearMarca($id, $nombre, $img)) {
+                    $params = 0;
+                } else {
+                    $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                }
+            } else {
+                foreach ($resultado as $valor => $k) {
+                    foreach ($k as $v => $s) {
+                        $params = $s[1];
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logExceptio.txt");
+            header('Location: index.php?operacion=error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
+            header('Location: index.php?operacion=error');
+        }
+
+        require __DIR__ . '/templates/json.php';
+    }
+
+    public function PaginaModificarMarca()
+    {
+        $marca = recoge("marca");
+        $m = new Model();
+        $BDMarca = $m->InfoMarcas($marca);
+        require __DIR__ . '/templates/PaginaModificarMarca.php';
+    }
+
+
+    public function ActualizarMarcas()
+    {
+        try {
+            $m = new Model();
+            $val = new Validacion();
+            $nombre = recoge("nombre");
+            $img = recoge("img");
+            $id = recoge("id");
+            $identificador = recoge('identificador');
+            $valor['id'] = $id;
+            $valor['nombre'] = $nombre;
+            $datos = $valor;
+
+            $regla = array(
+
+                array(
+                    'name' => 'nombre',
+                    'regla' => 'no-empty,ValidarTexto'
+                ),
+                array(
+                    'name' => 'id',
+                    'regla' => 'no-empty,numeric'
+                ),
+            );
+
+            $resultado = $val->rules($regla, $datos);
+            if ($resultado === true) {
+                if ($m->ActualizarMarca($id, $nombre, $img, $identificador)) {
+                    $params = 0;
+                } else {
+                    $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                }
+            } else {
+                foreach ($resultado as $valor => $k) {
+                    foreach ($k as $v => $s) {
+                        $params = $s[1];
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logExceptio.txt");
+            header('Location: index.php?operacion=error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
+            header('Location: index.php?operacion=error');
+        }
+
+        require __DIR__ . '/templates/json.php';
+    }
+    public function EliminarMarca()
+    {
+        $m = new Model();
+        $id = recoge('id');
+        if ($m->EliminarMarca($id) && $m->EliminarProductosMarca($id)) {
+            $params = "La eliminacion se hizo satisfactoriamente";
+        } else {
+            $params = "Lo sentimos huvo un error vuelve a probarlo";
+        }
+        require __DIR__ . '/templates/json.php';
+
+    }
+    public function CambioPaginaModProductos(){
+        $seccion = recoge('seccion');
+        require __DIR__ . '/templates/CambioPaginaModProductos.php';
+    }
 }

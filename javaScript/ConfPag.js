@@ -3,10 +3,9 @@ $(document).ready(function () {
     ConfAltoPagina();
     SesionAbierta();
     MostrarConcesionario();
-    PonerActiveAlMenu();
     RutaOperacionesAdmin();
     CerrarAviso();
-    
+    PonerActiveAlMenu();
 });
 
 //Esta funcion la utilize al principio para poner un heigth fijo calculando el alto de la pantalla 
@@ -81,12 +80,10 @@ function CerrarAviso() {
 function PonerActiveAlMenu() {
 
     $("#Activar li").bind("click", function (event) {
-        if ($('#Activar li').hasClass('active')) {
+       
             $('#Activar li').removeClass('active');
             $(this).addClass("active");
-        } else {
-            $(this).addClass("active");
-        }
+        
 
     });
 

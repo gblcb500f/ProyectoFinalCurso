@@ -28,7 +28,7 @@
     </div>
 <?php }
 if (empty($usuarios)) { ?>
-    <div id="eventos">
+ 
         <table class="table table-dark">
             <thead>
                 <tr class="text-danger">
@@ -39,7 +39,7 @@ if (empty($usuarios)) { ?>
         </table>
         <h4>Lo sentimos no se encontro ninguna marca a mostrar</h4>
 
-    </div>
+ 
 
 
 <?php } else { ?>

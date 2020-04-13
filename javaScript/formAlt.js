@@ -1,9 +1,5 @@
 $(document).ready(function () {
-    
-    if ($("#formulario")[0]) {
         ValidarFormulario();
-        
-    }
 });
 
 function ValidarFormulario() {
@@ -84,7 +80,7 @@ function ValidarFormulario() {
                                                                                                 if (pass1 == pass2) {
                                                                                                     if (file != "") {
                                                                                                         $.ajax({
-                                                                                                            url: "../web/index.php?operacion=SubirImgPersona", type: "POST", data:data, contentType: false, processData: false, success: function (img) {
+                                                                                                            url: "../web/index.php?operacion=SubirImgPersona", type: "POST", data: data, contentType: false, processData: false, success: function (img) {
                                                                                                                 if (!img) {
                                                                                                                     $("#textError").append("<p id='Error'>Lo sentimos la imagen no se pudo subir</p>");
                                                                                                                     $("#Error").css("color", "red");
@@ -160,66 +156,4 @@ function mensaje(MensajesServidor) {
         $("#textError").append(`<p id='Error'>${MensajesServidor}</p>`);
         $("#Error").css("color", "red");
     }
-}
-
-function campoVacio(campo) {
-    $("#textError").append(`<p id='Error'>Lo sentimos el campo ${campo} esta vacio, se debe rellenar</p>`);
-    $("#Error").css("color", "red");
-}
-function ErrorValidacion(campo, validacion) {
-    $("#textError").append(`<p id='Error'>Lo sentimos el campo ${campo} no es corecto tiene que tener: <br> ${validacion}</p>`);
-    $("#Error").css("color", "red");
-}
-
-function getFiles() {
-
-    var idFiles = document.getElementById("idFiles");
-
-    // Obtenemos el listado de archivos en un array
-
-    var archivos = idFiles.files;
-
-    // Creamos un objeto FormData, que nos permitira enviar un formulario
-
-    // Este objeto, ya tiene la propiedad multipart/form-data
-
-    var data = new FormData();
-
-    // Recorremos todo el array de archivos y lo vamos añadiendo all
-
-    // objeto data
-
-    for (var i = 0; i < archivos.length; i++) {
-        // Al objeto data, le pasamos clave,valor
-
-        data.append("archivo" + i, archivos[i]);
-    }
-    return data;
-
-}
-
-
-/**
-
- * Función que recorre todo el formulario para apadir en el FormData los valores del formulario
-
- * @param string id hace referencia al id del formulario
-
- * @param FormData data hace referencia al FormData
-
- * @return FormData
-
- */
-
-function getFormData(id, data) {
-    $("#" + id).find("input,select").each(function (i, v) {
-        if (v.type !== "file") {
-            if (v.type === "checkbox" && v.checked === true) {
-                data.append(v.name, "on");
-            } else {
-                data.append(v.name, v.value);
-            }
-        }
-    });
-    return data;
 }

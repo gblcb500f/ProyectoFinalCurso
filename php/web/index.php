@@ -37,17 +37,26 @@ $map = array(
     'SubirImgProducto' => array('controller' =>'Controller', 'action' =>'SubirImgProducto', 'acceso'=>1),
     'CambioPaginaModMarcas' => array('controller' =>'Controller', 'action' =>'CambioPaginaModMarcas', 'acceso'=>1),
     'PaginaMostrarMarcas' => array('controller' =>'Controller', 'action' =>'PaginaMostrarMarcas', 'acceso'=>1),
+    'CrearMarcas' => array('controller' =>'Controller', 'action' =>'CrearMarcas', 'acceso'=>1),
+    'formCrearMarcas' => array('controller' =>'Controller', 'action' =>'formCrearMarcas', 'acceso'=>1),
+    'PaginaModificarMarca' => array('controller' =>'Controller', 'action' =>'PaginaModificarMarca', 'acceso'=>1),
+    'ActualizarMarcas' => array('controller' =>'Controller', 'action' =>'ActualizarMarcas', 'acceso'=>1),
+    'EliminarMarca' => array('controller' =>'Controller', 'action' =>'EliminarMarca', 'acceso'=>1),
+    'CambioPaginaModProductos' => array('controller' =>'Controller', 'action' =>'CambioPaginaModProductos', 'acceso'=>1),
+
+    
+
+    
+
+
+
+
 
 
     
-    
-
-    
-    
 
 
 
-    
 );    
 // Parseo de la ruta    SubirImg
    
@@ -60,13 +69,15 @@ if (isset($_REQUEST['operacion'])) {  //comprovamos que existe la variable opera
     if (isset($map[$_REQUEST['operacion']])) {
         $ruta = $_REQUEST['operacion'];
     } else {
-       echo $_REQUEST['operacion']."Lo sentimos la ruta especificada no existe :(";
+      
+       echo $_REQUEST['operacion']." ---  Lo sentimos la ruta especificada no existe :(";
     }
 } else {
     $ruta = 'home';
 }
 
 $controlador = $map[$ruta];
+
 // Ejecución del controlador asociado a la ruta y comprovamos el nivel del usuario si puede acceder o no a la ruta
 if (method_exists($controlador['controller'], $controlador['action']) && ($controlador['acceso']==0 || $controlador['acceso']<=$_SESSION['nivel'])) {
     call_user_func(array(

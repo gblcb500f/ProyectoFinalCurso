@@ -1,82 +1,3 @@
-$(document).ready(function () {
-    EnrutarPagUser();
-});
-//En esta funcion el usuario elige la opcion de configuracion de usuario y muestra el contenido
-function EnrutarPagUser() {
-    $("#OpModUser div").on('click', function (event) {
-        switch ($(this).attr('id')) {
-            case "ModUsuarios":
-                CambiarComportamientoDeLaPaginaModUser('ModUsuarios'); break;
-            case "ModPermisos":
-                CambiarComportamientoDeLaPaginaModUser('ModPermisos'); break;
-            case "ModValores":
-                CambiarComportamientoDeLaPaginaModUser('ModValores'); break;
-            case "ElmUsuario":
-                CambiarComportamientoDeLaPaginaModUser('ElmUsuario'); break;
-        }
-
-    });
-}
-//En esta funcion se hace una llamada ajax devolviendo el contenido html a mostrar de la operacion seleccionada
-function CambiarComportamientoDeLaPaginaModUser($seccion) {
-    $("#CambioPaginaModUser").empty();
-    $.ajax({
-        url: "../web/index.php", type: "POST", data: { operacion: "CambioPaginaModUser", seccion: $seccion }, success: function ($respuesta) {
-            $("#CambioPaginaModUser").html($respuesta);
-            EnrutarPagUser();
-            MostrarContenidoDeModificacionUsuarios();
-        }
-    });
-
-}
-
-function MostrarContenidoDeModificacionUsuarios() {
-
-    if ($("#MU")[0]) {
-        $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarUsuarios", alerta: 1 }, success: function ($respuesta) {
-                $("#MU").html($respuesta);
-                CerrarAviso();
-                MostrarPersona();
-            }
-        });
-
-    } else if ($("#MP")[0]) {
-        $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaModificarPermisos" }, success: function ($respuesta) {
-                $("#MP").empty();
-                $("#MP").html($respuesta);
-                for (let i = 0; i < $("tr #nivel").length; i++) {
-                    if ($("tr #nivel").eq(i).text() == 1) {
-                        $('input[name=pulsar]').eq(i).attr("checked", true);
-                    }
-                }
-                DarQuitarPermisos();
-            }, error: function (params) {
-                console.log(params);
-            }
-
-
-        });
-    } else if ($("#MV")[0]) {
-        $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarUsuarios", alerta: 2 }, success: function ($respuesta) {
-                $("#MV").html($respuesta);
-                CerrarAviso();
-                ModificarUsuarios();
-            }
-        });
-    } else if ($("#EU")[0]) {
-
-        $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarUsuarios", alerta: 3 }, success: function ($respuesta) {
-                $("#EU").html($respuesta);
-                CerrarAviso();
-                EliminarPersona();
-            }
-        });
-    }
-}
 function EliminarPersona() {
     let usuario;
     $("#MostrarPersona tr").on('click', function (event) {
@@ -147,7 +68,6 @@ function ModificarUsuarios() {
         usuario = $(this).attr('usuario');
         $.ajax({
             url: "../web/index.php", type: "POST", data: { operacion: "PaginaModificarValores", usuario: usuario }, success: function ($respuesta) {
-
                 $("#MV").empty();
                 $("#MV").html($respuesta);
                 ActualizarDatosUsuario();
@@ -221,29 +141,29 @@ function ActualizarDatosUsuario() {
                                                                             if (!ValidarUsuario.test(usuario)) {
                                                                                 ErrorValidacion("usuario", " una longitud de 5 a 50 tanto letras como numeros y _");
                                                                             } else {
-
-                                                                                if (file != "" && provincia != "") {
-                                                                                    $.ajax({
-                                                                                        url: "../web/index.php?operacion=SubirImgPersona", type: "POST", data: data, contentType: false, processData: false, success: function (img) {
-                                                                                            if (!img) {
-                                                                                                $("#textError").append("<p id='Error'>Lo sentimos la imagen no se pudo subir</p>");
-                                                                                                $("#Error").css("color", "red");
-                                                                                            } else {
-                                                                                                $.ajax({
-                                                                                                    url: "../web/index.php", type: "POST", data: {operacion:"ActualizarPersona", nombre: nombre, apellidos: apellidos, dni: dni, edad: edad, telefono: telefono, email: email, cp: cp, direccion: direccion, provincia: provincia, img: img, usuario: usuario }, success: function ($respuesta) {
-                                                                                                        mensaje($respuesta);
-                                                                                                    }
-                                                                                                });
+                                                                                if (provincia != "") {
+                                                                                    if (file != "") {
+                                                                                        $.ajax({
+                                                                                            url: "../web/index.php?operacion=SubirImgPersona", type: "POST", data: data, contentType: false, processData: false, success: function (img) {
+                                                                                                if (!img) {
+                                                                                                    $("#textError").append("<p id='Error'>Lo sentimos la imagen no se pudo subir</p>");
+                                                                                                    $("#Error").css("color", "red");
+                                                                                                } else {
+                                                                                                    $.ajax({
+                                                                                                        url: "../web/index.php", type: "POST", data: { operacion: "ActualizarPersona", nombre: nombre, apellidos: apellidos, dni: dni, edad: edad, telefono: telefono, email: email, cp: cp, direccion: direccion, provincia: provincia, img: img, usuario: usuario }, success: function ($respuesta) {
+                                                                                                            mensaje($respuesta);
+                                                                                                        }
+                                                                                                    });
+                                                                                                }
                                                                                             }
-                                                                                        }
-                                                                                    });
+                                                                                        });
+                                                                                    } else {
+                                                                                        campoVacio("imagen");
+                                                                                    }
                                                                                 } else {
-                                                                                    $.ajax({
-                                                                                        url: "../web/index.php", type: "POST", data: {operacion:"ActualizarPersona", nombre: nombre, apellidos: apellidos, dni: dni, edad: edad, telefono: telefono, email: email, cp: cp, direccion: direccion, provincia: '', img:'', usuario: usuario }, success: function ($respuesta) {
-                                                                                            mensaje($respuesta);
-                                                                                        }
-                                                                                    });
+                                                                                    campoVacio("provincia");
                                                                                 }
+
                                                                             }
                                                                         } else {
                                                                             campoVacio("usuario");
@@ -283,42 +203,18 @@ function ActualizarDatosUsuario() {
     });
 }
 function mensaje(MensajesServidor) {
-    alert(MensajesServidor);
-    /* if (Number(MensajesServidor) == 0) {
-        window.location.href = "index.php?operacion=PaginaModificarValores";
+
+     if (Number(MensajesServidor) == 0) {
+     alert("Fantastico se pudo actualizar los datos");
+     $.ajax({
+        url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarUsuarios", alerta: 2 }, success: function ($respuesta) {
+            $("#MV").html($respuesta);
+            CerrarAviso();
+            ModificarUsuarios();
+        }
+    });
     } else {
         $("#textError").append(`<p id='Error'>${MensajesServidor}</p>`);
         $("#Error").css("color", "red");
-    } */
-}
-function campoVacio(campo) {
-    $("#textError").append(`<p id='Error'>Lo sentimos el campo ${campo} esta vacio, se debe rellenar</p>`);
-    $("#Error").css("color", "red");
-}
-function ErrorValidacion(campo, validacion) {
-    $("#textError").append(`<p id='Error'>Lo sentimos el campo ${campo} no es corecto tiene que tener: <br> ${validacion}</p>`);
-    $("#Error").css("color", "red");
-}
-
-function getFiles() {
-    var idFiles = document.getElementById("idFiles");
-    var archivos = idFiles.files;
-    var data = new FormData();
-    for (var i = 0; i < archivos.length; i++) {
-        data.append("archivo" + i, archivos[i]);
-    }
-    return data;
-
-}
-function getFormData(id, data) {
-    $("#" + id).find("input,select").each(function (i, v) {
-        if (v.type !== "file") {
-            if (v.type === "checkbox" && v.checked === true) {
-                data.append(v.name, "on");
-            } else {
-                data.append(v.name, v.value);
-            }
-        }
-    });
-    return data;
+    } 
 }

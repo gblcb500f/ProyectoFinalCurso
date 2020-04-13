@@ -77,19 +77,19 @@ class Model extends PDO
         return $result;
     }
     public function ActualizarPersona($nombre,$apellido,$dni,$edad,$telefono,$email,$cp,$direccion,$provincia,$img,$usuario){
-        $consulta = "UPDATE persona SET nombre=:nombre,apellido=:apellido,dni=:dni,edad=:edad,telefono=:telefono,email=:email,cp=:cp,direccion=:direccion,provincia=:provincia,img=:img WHERE usuario=:usuario";
+        $consulta = "UPDATE persona SET nombre=:nombre,apellido=:apellido,dni=:dni,edad=:edad,telefono=:telefono,email=:email,codigoPostal=:cp,direccion=:direccion,provincia=:provincia,img=:img WHERE usuario=:id";
         $result = $this->conexion->prepare($consulta);
-        $result->bindParam(1, $dni);
-        $result->bindParam(2, $nombre);
-        $result->bindParam(3, $apellido);
-        $result->bindParam(4, $usuario);
-        $result->bindParam(5, $edad);
-        $result->bindParam(6, $email);
-        $result->bindParam(7, $telefono);
-        $result->bindParam(8, $provincia);
-        $result->bindParam(9, $cp);
-        $result->bindParam(10, $direccion);
-        $result->bindParam(11, $img);
+        $result->bindParam(":dni", $dni);
+        $result->bindParam(":nombre", $nombre);
+        $result->bindParam(":apellido", $apellido);
+        $result->bindParam(":edad", $edad);
+        $result->bindParam(":email", $email);
+        $result->bindParam(":telefono", $telefono);
+        $result->bindParam(":provincia", $provincia);
+        $result->bindParam(":cp", $cp);
+        $result->bindParam(":direccion", $direccion);
+        $result->bindParam(":img", $img);
+        $result->bindParam(":id", $usuario);
         $result->execute();
         return $result;
     }
@@ -107,10 +107,54 @@ class Model extends PDO
         $result->execute();
         return $result;
     }
+/*--------------------------------------------------- Operaciones de marcas ------------------------------------------------------------------------------------------------------------------------- */
+
     public function MostrarMarcas(){
         $consulta = "select * from marcas";
         $result = $this->conexion->prepare($consulta);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_NUM);
+    }
+    public function CrearMarca($id,$nombre,$img){
+        $consulta = "insert into marcas (id,marca,img) values (?,?,?)";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(1, $id);
+        $result->bindParam(2, $nombre);
+        $result->bindParam(3, $img);
+        $result->execute();
+        return $result;
+    }
+    public function InfoMarcas($marca){
+        $consulta = "select * from marcas where id=:marca";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':marca', $marca);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+
+    public function ActualizarMarca($id,$nombre,$img,$identificador){
+        $consulta = "UPDATE marcas SET id=:id,marca=:marca,img=:img WHERE id=:identificador";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':id', $id);
+        $result->bindParam(':marca', $nombre);
+        $result->bindParam(':img', $img);
+        $result->bindParam(':identificador', $identificador);
+        $result->execute();
+        return $result;
+    }
+
+    public function EliminarMarca($id){
+        $consulta = "delete from marcas where id=:id";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(":id", $id);
+        $result->execute();
+        return $result;
+    }
+    public function EliminarProductosMarca($id){
+        $consulta = "delete from moto where id_moto=:id";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(":id", $id);
+        $result->execute();
+        return $result;
     }
 }

@@ -96,6 +96,7 @@
     <script src="/proyectoFinal/javaScript/formAlt.js"></script>
     <script src="/proyectoFinal/javaScript/login.js"></script>
     <script src="/proyectoFinal/javaScript/Contactanos.js"></script>
+        <script src="/proyectoFinal/javaScript/MostrarErroresSubirImagenes.js"></script>
 </body>
 
 </html>
