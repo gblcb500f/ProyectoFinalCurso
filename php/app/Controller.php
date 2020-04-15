@@ -676,4 +676,151 @@ class Controller
         $seccion = recoge('seccion');
         require __DIR__ . '/templates/CambioPaginaModProductos.php';
     }
+    public function PaginaCrearProductos(){
+        $marca=recoge("marca");
+        require __DIR__ . '/templates/PaginaCrearProductos.php';
+    }
+    public function PaginaMostrarProductos(){
+        $marca=recoge("marca");
+        $m=new Model();
+        $datos=$m->MostrarProductos($marca);
+        require __DIR__ . '/templates/PaginaMostrarProductos.php';
+    }
+    public function OPProducto(){
+        try {
+            $m = new Model();
+            $val = new Validacion();
+            $tipo=recoge("tipo");
+            $nombre = recoge("nombre");
+            $gama=recoge("gama");
+            $img = recoge("file");
+            $id_marca = recoge("id_marca");
+            $cilindrada = recoge('cilindrada');
+            $caballos = recoge('caballos');
+            $tipoCarnet = recoge('tipoCarnet');
+            $precio = recoge('precio');
+
+            $valor['nombre'] = $nombre;
+            $valor['cilindrada'] = $cilindrada;
+            $valor['caballos'] = $caballos;
+            $valor['tipoCarnet'] = $tipoCarnet;
+            $valor['precio'] = $precio;
+            $valor['gama'] = $gama;
+          
+            $datos = $valor;
+
+            $regla = array(
+
+                array(
+                    'name' => 'nombre',
+                    'regla' => 'no-empty,ValidarVarchar'
+                ),
+                array(
+                    'name' => 'cilindrada',
+                    'regla' => 'no-empty,ValidarVarchar'
+                ),
+                array(
+                    'name' => 'caballos',
+                    'regla' => 'no-empty,numeric'
+                ),
+                array(
+                    'name' => 'tipoCarnet',
+                    'regla' => 'no-empty,ValidarVarchar'
+                ),
+                array(
+                    'name' => 'gama',
+                    'regla' => 'no-empty,ValidarVarchar'
+                ),
+                array(
+                    'name' => 'precio',
+                    'regla' => 'no-empty,numeric'
+                ),
+            );
+
+            $resultado = $val->rules($regla, $datos);
+            if ($resultado === true) {
+                if($tipo=="crear"){
+                if ($m->CrearProducto($nombre, $cilindrada, $caballos, $tipoCarnet,$precio,$img,$id_marca,$gama)) {
+                    $params = "Fantastico se creo correectamente :)";
+                } else {
+                    $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                }
+            }else if($tipo=="modificar"){
+                if ($m->ActualizarProducto($nombre, $cilindrada, $caballos, $tipoCarnet,$precio,$img,$gama,$id_marca)) {
+                    $params = "La actualizacion se hizo correctamente:)";
+                } else {
+                    $params = "Lo sentimos no se pudo actualizar los datos a la base de datos";
+                }
+            }
+            } else {
+                 foreach ($resultado as $valor => $k) {
+                    foreach ($k as $v => $s) {
+                        $params = $s[1];
+                    }
+                } 
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logExceptio.txt");
+            header('Location: index.php?operacion=error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
+            header('Location: index.php?operacion=error');
+        }
+
+        require __DIR__ . '/templates/json.php';
+    }
+    public function EliminarProducto(){
+        $m=new Model();
+        $id=recoge("producto");
+        if($m->EliminarProducto($id)){
+            $params="Fantastico se elimino correctamente :)";
+        }else{
+            $params="Lo sentimos no se pudo eliminar :(";
+        }
+        require __DIR__ . '/templates/json.php';
+    }
+    public function ModificarProducto(){
+        $m=new Model();
+        $id=recoge("producto");
+        $datos=$m->ObtenerProducto($id);
+        require __DIR__ . '/templates/ModificarProducto.php';
+    }
+    public function GetDia(){
+    
+        $m = new Model();
+        $fecha = recoge("fecha");
+
+        $params = $m->ComprobarFestivo($fecha);
+        require __DIR__ . '/templates/json.php';
+    }
+    public function IntFestivo(){
+        $m = new Model();
+
+        $fecha = recoge("fecha");
+        $dia = recoge("diaFestivo");
+
+        if ($m->ComprobarFestivo($fecha)) {
+            $params = "There is the date";
+        } else {
+            if ($m->ReservarFestivo($fecha, $dia)) {
+                $params = "true";
+            } else {
+                $params = "error";
+            }
+        }
+        require __DIR__ . '/templates/json.php';
+    }
+    public function EliminarDiaFestivo()
+    {
+        $m = new Model();
+
+        $fecha = recoge("fecha");
+
+        if ($m->EliminarDiaFestivo($fecha)) {
+            $params = "success";
+        } else {
+            $params = "error";
+        }
+        require __DIR__ . '/templates/json.php';
+    }
 }

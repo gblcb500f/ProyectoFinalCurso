@@ -1,3 +1,5 @@
 SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens0.95642500 1586723932
 SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens0.75449600 1586724093
 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cp' in 'field list'0.47536500 1586724367
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre' in 'field list'0.08383700 1586886295
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre' in 'field list'0.99081100 1586886879

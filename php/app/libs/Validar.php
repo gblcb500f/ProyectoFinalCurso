@@ -220,6 +220,16 @@ class Validacion
             return false;
         }
     }
+
+    protected function _ValidarVarchar($campo, $valor)
+    {
+        if (preg_match("/^[0-9a-z]{1,}$/i", $valor)) {
+            return true;
+        } else {
+            $this->mensaje[$campo][] = "Lo sentimos el $campo no esta bien introducido, tiene que tener letras y numeros";
+            return false;
+        }
+    }
     /**
      * Metodo de ValidarDireccion 
      * El metodo retorna un valor verdadero si la validacion es correcta de lo contrario retorna un valor falso

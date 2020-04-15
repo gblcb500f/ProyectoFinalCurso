@@ -40,7 +40,6 @@ function EnrutarPaginas() {
             case "ElmProducto":
                 CambiarComportamientoDeLaPagina('ElmProducto', 'producto'); break;
         }
-
     });
 }
 
@@ -156,7 +155,7 @@ function MostrarContenidoDeModificaciones() {
         /* -----------------------------------------------Usuarios-------------------------------------------------------------- */
     } else if ($("#VP")[0]) {
         $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarProductos", alerta: 1 }, success: function ($respuesta) {
+            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarMarcas", alerta: 3 }, success: function ($respuesta) {
                 $("#VP").html($respuesta);
                 CerrarAviso();
                 MostrarProductos();
@@ -165,14 +164,15 @@ function MostrarContenidoDeModificaciones() {
 
     } else if ($("#CP")[0]) {
         $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaCrearProductos" }, success: function ($respuesta) {
-                $("#CP").empty();
+            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarMarcas", alerta: 6 }, success: function ($respuesta) {
                 $("#CP").html($respuesta);
+                CerrarAviso();
+                CrearProducto();
             }
         });
     } else if ($("#ModP")[0]) {
         $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaModificarProductos", alerta: 2 }, success: function ($respuesta) {
+            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarMarcas", alerta: 4 }, success: function ($respuesta) {
                 $("#ModP").html($respuesta);
                 CerrarAviso();
                 ModificarProductos();
@@ -181,7 +181,7 @@ function MostrarContenidoDeModificaciones() {
     } else if ($("#EP")[0]) {
 
         $.ajax({
-            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarUsuarios", alerta: 3 }, success: function ($respuesta) {
+            url: "../web/index.php", type: "POST", data: { operacion: "PaginaMostrarMarcas", alerta: 5 }, success: function ($respuesta) {
                 $("#EP").html($respuesta);
                 CerrarAviso();
                 EliminarProductos();

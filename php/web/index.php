@@ -43,15 +43,20 @@ $map = array(
     'ActualizarMarcas' => array('controller' =>'Controller', 'action' =>'ActualizarMarcas', 'acceso'=>1),
     'EliminarMarca' => array('controller' =>'Controller', 'action' =>'EliminarMarca', 'acceso'=>1),
     'CambioPaginaModProductos' => array('controller' =>'Controller', 'action' =>'CambioPaginaModProductos', 'acceso'=>1),
+    'PaginaCrearProductos' => array('controller' =>'Controller', 'action' =>'PaginaCrearProductos', 'acceso'=>1),
+    'PaginaMostrarProductos' => array('controller' =>'Controller', 'action' =>'PaginaMostrarProductos', 'acceso'=>1),
+    'OPProducto' => array('controller' =>'Controller', 'action' =>'OPProducto', 'acceso'=>1),
+    'EliminarProducto' => array('controller' =>'Controller', 'action' =>'EliminarProducto', 'acceso'=>1),
+    'ModificarProducto' => array('controller' =>'Controller', 'action' =>'ModificarProducto', 'acceso'=>1),
+    'GetDia' => array('controller' =>'Controller', 'action' =>'GetDia', 'acceso'=>1),
+    'IntFestivo' => array('controller' =>'Controller', 'action' =>'IntFestivo', 'acceso'=>1),
+    'EliminarDiaFestivo' => array('controller' =>'Controller', 'action' =>'EliminarDiaFestivo', 'acceso'=>1),
+
+
 
     
-
     
-
-
-
-
-
+    
 
     
 

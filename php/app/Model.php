@@ -157,4 +157,80 @@ class Model extends PDO
         $result->execute();
         return $result;
     }
+    public function MostrarProductos($marca){
+        $consulta = "select * from moto where id_moto=:marca";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':marca', $marca);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+    public function CrearProducto($nombre, $cilindrada, $caballos, $tipoCarnet,$precio,$img,$id_marca,$gama){
+        $consulta = "insert into moto (nombre, cilindrada, cv,tipoCarnet,id_moto,imagen,precio,gama) values (?,?,?,?,?,?,?,?)";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(1, $nombre);
+        $result->bindParam(2, $cilindrada);
+        $result->bindParam(3, $caballos);
+        $result->bindParam(4, $tipoCarnet);
+        $result->bindParam(5, $id_marca);
+        $result->bindParam(6, $img);
+        $result->bindParam(7, $precio);
+        $result->bindParam(8, $gama);
+        $result->execute();
+        return $result;
+    }
+    public function EliminarProducto($id){
+        $consulta = "delete from moto where id=:id";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(":id", $id);
+        $result->execute();
+        return $result;
+    }
+    public function ObtenerProducto($id){
+        $consulta = "select * from moto where id=:id";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':id', $id);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+    public function ActualizarProducto($nombre, $cilindrada, $caballos, $tipoCarnet,$precio,$img,$gama,$id_marca){
+        $consulta = "UPDATE moto SET nombre=:nombre,cilindrada=:cilindrada,cv=:caballos,tipocarnet=:tipoCarnet,imagen=:img,precio=:precio,gama=:gama WHERE id=:identificador";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':nombre', $nombre);
+        $result->bindParam(':cilindrada', $cilindrada);
+        $result->bindParam(':caballos', $caballos);
+        $result->bindParam(':tipoCarnet', $tipoCarnet);
+        $result->bindParam(':img', $img);
+        $result->bindParam(':precio', $precio);
+        $result->bindParam(':gama', $gama);
+        $result->bindParam(':identificador', $id_marca);
+        $result->execute();
+        return $result;
+    }
+    public function ComprobarFestivo($fecha){
+        $consulta="select * from diasfestivos where fecha=:fecha ";
+        $result=$this->conexion->prepare($consulta);
+        $result->bindParam(":fecha",$fecha);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+
+    
+    public function ReservarFestivo($fecha,$dia){
+        
+        $consulta="insert into diasfestivos (fecha,DiasFestivos) values(?,?) ";
+        $result=$this->conexion->prepare($consulta);
+        $result->bindParam(1,$fecha);
+        $result->bindParam(2,$dia);
+        $result->execute();
+        return $result;
+    }
+
+    public function EliminarDiaFestivo($fecha){
+        $consulta = "delete from diasfestivos where fecha=:fecha ";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':fecha', $fecha);
+        $result->execute();
+        return $result;
+    }
+
 }

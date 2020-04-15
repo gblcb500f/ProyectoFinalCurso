@@ -18,12 +18,37 @@
     </div>
 <?php } else if ($alerta == 3) { ?>
     <div class="alert bg-warning" role="alert" id="MensajeAviso">
-        <p class="text-dark"></p>
+        <p class="text-dark">En este apartado podras ver los productos que existe en cada marca <br>
+        si haces click encima de una te mostrara todos los productos disponibles</p>
         <div class="d-flex justify-content-end" id="CerrarAviso">
             <button class="btn btn-dark">Cerrar</button>
         </div>
     </div>
-<?php }
+<?php } else if ($alerta == 4) { ?>
+    <div class="alert bg-warning" role="alert" id="MensajeAviso">
+        <p class="text-dark">En este apartado podras moficar los productos que existe en cada marca <br>
+        si haces click encima de una te mostrara todos los productos a modificar</p>
+        <div class="d-flex justify-content-end" id="CerrarAviso">
+            <button class="btn btn-dark">Cerrar</button>
+        </div>
+    </div>
+<?php } else if ($alerta == 5) { ?>
+    <div class="alert bg-warning" role="alert" id="MensajeAviso">
+        <p class="text-dark">En este apartado podras ver los productos que existe en cada marca <br>
+        si haces click encima de una te mostrara todos los productos a eliminar <br>TEN CUIDADO UNA VEZ ELIMMINADO NO SE RECUPERA</p>
+        <div class="d-flex justify-content-end" id="CerrarAviso">
+            <button class="btn btn-dark">Cerrar</button>
+        </div>
+    </div>
+<?php }else if ($alerta == 6) { ?>
+    <div class="alert bg-warning" role="alert" id="MensajeAviso">
+        <p class="text-dark">En este apartado podras crear productos en cada marca <br>
+        si haces click encima de una marca te saldra un formulario a rellenar </p>
+        <div class="d-flex justify-content-end" id="CerrarAviso">
+            <button class="btn btn-dark">Cerrar</button>
+        </div>
+    </div>
+    <?php }
 if (empty($datos)) { ?>
 
     <table class="table table-dark">

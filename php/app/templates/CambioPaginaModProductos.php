@@ -8,16 +8,16 @@
                     <?php
 
                     switch ($seccion) {
-                        case "MostrarMarcas":
+                        case "MostrarProductos":
                             echo "<div id='VP'> </div>";
                             break;
-                        case "CrearMarcas":
+                        case "CrearProductos":
                             echo "<div id='CP'> </div>";
                             break;
-                        case "ModMarcas":
+                        case "ModProducto":
                             echo "<div id='ModP'> </div>";
                             break;
-                        case "ElmMarcas":
+                        case "ElmProducto":
                             echo "<div id='EP'>  </div>";
                             break;
                     }
