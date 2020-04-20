@@ -35,3 +35,43 @@ form{
     height: 250px;
     overflow: scroll;
 }
+.marcas{
+    height:200px;
+    width: 250px;
+}
+#modelos{
+    background: url('/proyectoFinal/imagenes/marca/modelos.jpg') no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 350px;
+    background-attachment: fixed;
+    text-align: center;
+  
+   
+   
+}
+.model{
+    margin-top: 60px;
+    font-size: 200%;
+    font-weight: bold;
+    letter-spacing: 10px;
+    text-align: center;
+    text-shadow: rgb(114, 2, 2) 6px 6px;
+    text-transform: uppercase;
+}
+.fondo{
+    background: url('/proyectoFinal/imagenes/marca/fondo.jpg') no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+  
+}
+.sub{
+    width: 500px;
+    height: 2px;
+}

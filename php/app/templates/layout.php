@@ -58,21 +58,20 @@
                             MARCAS Y MODELOS
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="index.php?operacion=honda" id="honda">Honda</a>
-                            <a class="dropdown-item" href="index.php?operacion=kawassaki" id="kawassaki">Kawassaki</a>
-                            <a class="dropdown-item" href="index.php?operacion=susuki" id="susuki">Susuki</a>
-                            <a class="dropdown-item" href="index.php?operacion=yamaha" id="yamaha">Yamaha</a>
-                            <a class="dropdown-item" href="index.php?operacion=ducati" id="ducati">Ducati</a>
-                            <a class="dropdown-item" href="index.php?operacion=triump" id="triump">Triump</a>
-                            <a class="dropdown-item" href="index.php?operacion=harley" id="harley">Harley Davison</a>
-                            <a class="dropdown-item" href="index.php?operacion=bmw" id="bmw">BMW</a>
+                            <a class="dropdown-item bg-danger" href="#">MARCAS</a>
+                            <div class="dropdown-divider" id="marcas"></div>
+                            <a class="dropdown-item bg-danger" href="#">GAMA</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.php?operacion=naked" id="naked">NAKED</a>
+                            <a class="dropdown-item" href="index.php?operacion=superSport" id="superSport">SUPER SPORT</a>
+                            <a class="dropdown-item" href="index.php?operacion=touring" id="touring">TOURING</a>
+                            <a class="dropdown-item" href="index.php?operacion=adventure" id="adventure">ADVENTURE</a>
+                            <a class="dropdown-item" href="index.php?operacion=custom" id="custom">CUSTOM</a>
 
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?operacion=contacto" id="contacto">CONTACTO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?operacion=reservas" id="reservas">HACER RESERVAS</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -93,10 +92,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="/proyectoFinal/javaScript/ConfPag.js"></script>
+    <script src="/proyectoFinal/javaScript/EnrutarArticulos.js"></script>
     <script src="/proyectoFinal/javaScript/formAlt.js"></script>
     <script src="/proyectoFinal/javaScript/login.js"></script>
     <script src="/proyectoFinal/javaScript/Contactanos.js"></script>
-        <script src="/proyectoFinal/javaScript/MostrarErroresSubirImagenes.js"></script>
+    <script src="/proyectoFinal/javaScript/MostrarErroresSubirImagenes.js"></script>
 </body>
 
 </html>

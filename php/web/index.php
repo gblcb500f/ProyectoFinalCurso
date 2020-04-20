@@ -51,6 +51,8 @@ $map = array(
     'GetDia' => array('controller' =>'Controller', 'action' =>'GetDia', 'acceso'=>1),
     'IntFestivo' => array('controller' =>'Controller', 'action' =>'IntFestivo', 'acceso'=>1),
     'EliminarDiaFestivo' => array('controller' =>'Controller', 'action' =>'EliminarDiaFestivo', 'acceso'=>1),
+    'ObtenerMarcas' => array('controller' =>'Controller', 'action' =>'ObtenerMarcas', 'acceso'=>0),
+    'PaginaMarca' => array('controller' =>'Controller', 'action' =>'PaginaMarca', 'acceso'=>0),
 
 
 

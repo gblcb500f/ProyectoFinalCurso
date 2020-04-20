@@ -3,9 +3,18 @@ include('libs/utils.php');
 
 class Controller
 {
-/* --------------------------------------------------------------------------------------------------------------------------- */
+    /* --------------------------------------------------------------------------------------------------------------------------- */
     public function home()
     {
+        $m=new Model();
+        $marcas=$m->MostrarMarcas();
+        $p=[];
+        for($i=0;$i<count($marcas);$i++){
+            $ruta=$marcas[$i][2];
+            $palabra=explode('/',$ruta);
+            $p[]=end($palabra);
+        }
+        
         require __DIR__ . '/templates/home.php';
     }
     public function homeAdmin()
@@ -357,7 +366,7 @@ class Controller
 
         require __DIR__ . '/templates/json.php';
     }
-/* -------------------------------------------------------------------------------------------------------------------------------------- */
+    /* -------------------------------------------------------------------------------------------------------------------------------------- */
     public function OpUsuarios()
     {
         require __DIR__ . '/templates/OpUsuarios.php';
@@ -442,56 +451,56 @@ class Controller
             $img = recoge("img");
             $usuario = recoge("usuario");
 
-                $valor['nombre'] = $nombre;
-                $valor['apellido'] = $apellido;
-                $valor['dni'] = $dni;
-                $valor['edad'] = $edad;
-                $valor['telefono'] = $telefono;
-                $valor['email'] = $email;
-                $valor['cp'] = $cp;
-                $valor['direccion'] = $direccion;
-                $valor['usuario'] = $usuario;
-                $datos = $valor;
+            $valor['nombre'] = $nombre;
+            $valor['apellido'] = $apellido;
+            $valor['dni'] = $dni;
+            $valor['edad'] = $edad;
+            $valor['telefono'] = $telefono;
+            $valor['email'] = $email;
+            $valor['cp'] = $cp;
+            $valor['direccion'] = $direccion;
+            $valor['usuario'] = $usuario;
+            $datos = $valor;
 
-                $regla = array(
-                    array(
-                        'name' => 'usuario',
-                        'regla' => 'no-empty,ValidarUsuario'
-                    ),
-                    array(
-                        'name' => 'email',
-                        'regla' => 'no-empty,email'
-                    ),
-                    array(
-                        'name' => 'nombre',
-                        'regla' => 'no-empty,ValidarTexto'
-                    ),
-                    array(
-                        'name' => 'apellido',
-                        'regla' => 'no-empty,ValidarTexto'
-                    ),
-                    array(
-                        'name' => 'dni',
-                        'regla' => 'no-empty,ValidarDni'
-                    ),
-                    array(
-                        'name' => 'telefono',
-                        'regla' => 'no-empty,ValidarTelefono'
-                    ),
-                    array(
-                        'name' => 'cp',
-                        'regla' => 'no-empty,ValidarCP'
-                    ),
-                    array(
-                        'name' => 'direccion',
-                        'regla' => 'no-empty,ValidarDireccion'
-                    ),
-                    array(
-                        'name' => 'edad',
-                        'regla' => 'no-empty,ValidarEdad'
-                    )
-                );
-            
+            $regla = array(
+                array(
+                    'name' => 'usuario',
+                    'regla' => 'no-empty,ValidarUsuario'
+                ),
+                array(
+                    'name' => 'email',
+                    'regla' => 'no-empty,email'
+                ),
+                array(
+                    'name' => 'nombre',
+                    'regla' => 'no-empty,ValidarTexto'
+                ),
+                array(
+                    'name' => 'apellido',
+                    'regla' => 'no-empty,ValidarTexto'
+                ),
+                array(
+                    'name' => 'dni',
+                    'regla' => 'no-empty,ValidarDni'
+                ),
+                array(
+                    'name' => 'telefono',
+                    'regla' => 'no-empty,ValidarTelefono'
+                ),
+                array(
+                    'name' => 'cp',
+                    'regla' => 'no-empty,ValidarCP'
+                ),
+                array(
+                    'name' => 'direccion',
+                    'regla' => 'no-empty,ValidarDireccion'
+                ),
+                array(
+                    'name' => 'edad',
+                    'regla' => 'no-empty,ValidarEdad'
+                )
+            );
+
             $resultado = $val->rules($regla, $datos);
             if ($resultado === true) {
                 if ($m->ActualizarPersona($nombre, $apellido, $dni, $edad, $telefono, $email, $cp, $direccion, $provincia, $img, $usuario)) {
@@ -579,10 +588,27 @@ class Controller
 
             $resultado = $val->rules($regla, $datos);
             if ($resultado === true) {
-                if ($m->CrearMarca($id, $nombre, $img)) {
-                    $params = 0;
+                $datosBD = $m->BuscarMarca();
+                if (!empty($datosBD)) {
+                    if (!array_search($id, array_column($datosBD, 0))) {
+                        if (!array_search($nombre, array_column($datosBD, 1))) {
+                            if ($m->CrearMarca($id, $nombre, $img)) {
+                                $params = 0;
+                            } else {
+                                $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                            }
+                        } else {
+                            $params = "Lo sentimos la marca existe";
+                        }
+                    } else {
+                        $params = "Lo sentimos el id existe";
+                    }
                 } else {
-                    $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                    if ($m->CrearMarca($id, $nombre, $img)) {
+                        $params = 0;
+                    } else {
+                        $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                    }
                 }
             } else {
                 foreach ($resultado as $valor => $k) {
@@ -670,29 +696,32 @@ class Controller
             $params = "Lo sentimos huvo un error vuelve a probarlo";
         }
         require __DIR__ . '/templates/json.php';
-
     }
-    public function CambioPaginaModProductos(){
+    public function CambioPaginaModProductos()
+    {
         $seccion = recoge('seccion');
         require __DIR__ . '/templates/CambioPaginaModProductos.php';
     }
-    public function PaginaCrearProductos(){
-        $marca=recoge("marca");
+    public function PaginaCrearProductos()
+    {
+        $marca = recoge("marca");
         require __DIR__ . '/templates/PaginaCrearProductos.php';
     }
-    public function PaginaMostrarProductos(){
-        $marca=recoge("marca");
-        $m=new Model();
-        $datos=$m->MostrarProductos($marca);
+    public function PaginaMostrarProductos()
+    {
+        $marca = recoge("marca");
+        $m = new Model();
+        $datos = $m->MostrarProductos($marca);
         require __DIR__ . '/templates/PaginaMostrarProductos.php';
     }
-    public function OPProducto(){
+    public function OPProducto()
+    {
         try {
             $m = new Model();
             $val = new Validacion();
-            $tipo=recoge("tipo");
+            $tipo = recoge("tipo");
             $nombre = recoge("nombre");
-            $gama=recoge("gama");
+            $gama = recoge("gama");
             $img = recoge("file");
             $id_marca = recoge("id_marca");
             $cilindrada = recoge('cilindrada');
@@ -706,7 +735,7 @@ class Controller
             $valor['tipoCarnet'] = $tipoCarnet;
             $valor['precio'] = $precio;
             $valor['gama'] = $gama;
-          
+
             $datos = $valor;
 
             $regla = array(
@@ -739,25 +768,25 @@ class Controller
 
             $resultado = $val->rules($regla, $datos);
             if ($resultado === true) {
-                if($tipo=="crear"){
-                if ($m->CrearProducto($nombre, $cilindrada, $caballos, $tipoCarnet,$precio,$img,$id_marca,$gama)) {
-                    $params = "Fantastico se creo correectamente :)";
-                } else {
-                    $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                if ($tipo == "crear") {
+                    if ($m->CrearProducto($nombre, $cilindrada, $caballos, $tipoCarnet, $precio, $img, $id_marca, $gama)) {
+                        $params = "Fantastico se creo correectamente :)";
+                    } else {
+                        $params = "Lo sentimos no se pudo subir los datos a la base de datos";
+                    }
+                } else if ($tipo == "modificar") {
+                    if ($m->ActualizarProducto($nombre, $cilindrada, $caballos, $tipoCarnet, $precio, $img, $gama, $id_marca)) {
+                        $params = "La actualizacion se hizo correctamente:)";
+                    } else {
+                        $params = "Lo sentimos no se pudo actualizar los datos a la base de datos";
+                    }
                 }
-            }else if($tipo=="modificar"){
-                if ($m->ActualizarProducto($nombre, $cilindrada, $caballos, $tipoCarnet,$precio,$img,$gama,$id_marca)) {
-                    $params = "La actualizacion se hizo correctamente:)";
-                } else {
-                    $params = "Lo sentimos no se pudo actualizar los datos a la base de datos";
-                }
-            }
             } else {
-                 foreach ($resultado as $valor => $k) {
+                foreach ($resultado as $valor => $k) {
                     foreach ($k as $v => $s) {
                         $params = $s[1];
                     }
-                } 
+                }
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logExceptio.txt");
@@ -769,31 +798,35 @@ class Controller
 
         require __DIR__ . '/templates/json.php';
     }
-    public function EliminarProducto(){
-        $m=new Model();
-        $id=recoge("producto");
-        if($m->EliminarProducto($id)){
-            $params="Fantastico se elimino correctamente :)";
-        }else{
-            $params="Lo sentimos no se pudo eliminar :(";
+    public function EliminarProducto()
+    {
+        $m = new Model();
+        $id = recoge("producto");
+        if ($m->EliminarProducto($id)) {
+            $params = "Fantastico se elimino correctamente :)";
+        } else {
+            $params = "Lo sentimos no se pudo eliminar :(";
         }
         require __DIR__ . '/templates/json.php';
     }
-    public function ModificarProducto(){
-        $m=new Model();
-        $id=recoge("producto");
-        $datos=$m->ObtenerProducto($id);
+    public function ModificarProducto()
+    {
+        $m = new Model();
+        $id = recoge("producto");
+        $datos = $m->ObtenerProducto($id);
         require __DIR__ . '/templates/ModificarProducto.php';
     }
-    public function GetDia(){
-    
+    public function GetDia()
+    {
+
         $m = new Model();
         $fecha = recoge("fecha");
 
         $params = $m->ComprobarFestivo($fecha);
         require __DIR__ . '/templates/json.php';
     }
-    public function IntFestivo(){
+    public function IntFestivo()
+    {
         $m = new Model();
 
         $fecha = recoge("fecha");
@@ -822,5 +855,19 @@ class Controller
             $params = "error";
         }
         require __DIR__ . '/templates/json.php';
+    }
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    public function ObtenerMarcas(){
+        $m = new Model();
+       $params=$m->OptenerMarca();
+        require __DIR__ . '/templates/json.php';
+    }
+
+    public function PaginaMarca(){
+        $marca=recoge("nombre");
+        $m=new Model();
+        $BDMarca=$m->MostrarProductos($marca);
+       
+        require __DIR__ . '/templates/PaginaMarca.php';
     }
 }

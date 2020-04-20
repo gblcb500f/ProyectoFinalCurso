@@ -233,4 +233,18 @@ class Model extends PDO
         return $result;
     }
 
+
+    public function   BuscarMarca(){
+        $consulta="select * from marcas ";
+        $result=$this->conexion->prepare($consulta);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+  
+    public function   OptenerMarca(){
+        $consulta="select marca from marcas ";
+        $result=$this->conexion->prepare($consulta);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
 }
