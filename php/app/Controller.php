@@ -867,7 +867,87 @@ class Controller
         $marca=recoge("nombre");
         $m=new Model();
         $BDMarca=$m->MostrarProductos($marca);
-       
         require __DIR__ . '/templates/PaginaMarca.php';
+    }
+
+    public function PaginaGama(){
+        $id=recoge("id");
+        $nombre=recoge("nombre");
+        $m=new Model();
+        $BDatos=$m->RecogerGama($id,$nombre);
+        require __DIR__ . '/templates/PaginaGama.php';
+
+    }
+
+    public function PaginaModelo(){
+        $id=recoge("id");
+        $m=new Model();
+        $BDatos=$m->RecogerModelo($id);
+        require __DIR__ . '/templates/PaginaModelo.php';
+    }
+
+    public function MostrarCalendarioUsuario(){
+        require __DIR__ . '/templates/MostrarCalendarioUsuario.php';
+    }
+    public function MostrarTodosLosModelosEnGama(){
+        $m=new Model();
+      /*   $tipo=recoge("tipo"); */ $tipo="Naked";
+        $BDatos=$m->RecogerMotosGama($tipo);
+        require __DIR__ . '/templates/MostrarTodosLosModelosEnGama.php';
+    }
+    public function GetHora(){
+        if (isset($_SESSION['usuario'])) {
+            $m = new Model();
+
+        $fecha = recoge("fecha");
+        $usuario=$_SESSION['usuario'];
+        if ($event = $m->ComprobarFestivo($fecha)) {
+            $params = 0; 
+        } else {
+            $params = $m->ComprobarFecha($fecha, $usuario);
+        }
+      
+        } else {
+           $params="Iniciar";
+        }
+        require __DIR__ . '/templates/json.php';
+    }
+
+    public function OPfecha()
+    {
+        $m = new Model();
+
+        $fecha =recoge("fecha");
+       $usuario=$_SESSION['usuario'];
+        $hora = recoge("hora");
+        if ($event = $m->ComprobarFestivo($fecha)) {
+            $params = "Sorry, no reservations can be made for this event:" . $event[0][2];
+        } else {
+            if ($m->ComprobarReservas($fecha, $hora, $usuario)) {
+                $params = "There is the date";
+            } else {
+                if ($m->ReservarReservas($fecha, $hora, $usuario)) {
+                    $params = "true";
+                } else {
+                    $params = "error";
+                }
+            }
+        }
+        require __DIR__ . '/templates/json.php';
+    }
+    public function Eliminarfecha()
+    {
+       
+        $m = new Model();
+
+        $fecha =recoge("fecha");
+        $usuario=$_SESSION['usuario'];
+        $hora =recoge("hora");
+        if ($m->EliminarReseva($fecha, $hora, $usuario)) {
+            $params = "success";
+        } else {
+            $params = "error";
+        }
+        require __DIR__ . '/templates/json.php';
     }
 }

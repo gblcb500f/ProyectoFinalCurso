@@ -53,13 +53,19 @@ $map = array(
     'EliminarDiaFestivo' => array('controller' =>'Controller', 'action' =>'EliminarDiaFestivo', 'acceso'=>1),
     'ObtenerMarcas' => array('controller' =>'Controller', 'action' =>'ObtenerMarcas', 'acceso'=>0),
     'PaginaMarca' => array('controller' =>'Controller', 'action' =>'PaginaMarca', 'acceso'=>0),
-
+    'PaginaGama' => array('controller' =>'Controller', 'action' =>'PaginaGama', 'acceso'=>0),
+    'PaginaModelo' => array('controller' =>'Controller', 'action' =>'PaginaModelo', 'acceso'=>0),
+    'MostrarCalendarioUsuario' => array('controller' =>'Controller', 'action' =>'MostrarCalendarioUsuario', 'acceso'=>0),
+    'MostrarTodosLosModelosEnGama' => array('controller' =>'Controller', 'action' =>'MostrarTodosLosModelosEnGama', 'acceso'=>0),
+    'GetHora' => array('controller' =>'Controller', 'action' =>'GetHora', 'acceso'=>0),
+    'OPfecha' => array('controller' =>'Controller', 'action' =>'OPfecha', 'acceso'=>0),
+    'Eliminarfecha' => array('controller' =>'Controller', 'action' =>'Eliminarfecha', 'acceso'=>0),
 
 
     
     
     
-
+    
     
 
 

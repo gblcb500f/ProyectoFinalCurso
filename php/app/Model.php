@@ -242,9 +242,78 @@ class Model extends PDO
     }
   
     public function   OptenerMarca(){
-        $consulta="select marca from marcas ";
+        $consulta="select id,marca from marcas ";
         $result=$this->conexion->prepare($consulta);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_NUM);
     }
+
+    public function RecogerGama($id,$nombre){
+        $consulta="select * from moto where id_moto=:id and gama=:nombre ";
+        $result=$this->conexion->prepare($consulta);
+        $result->bindParam(":id",$id);
+        $result->bindParam(":nombre",$nombre);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+
+    public function RecogerModelo($id){
+        $consulta="select * from moto where id=:id";
+        $result=$this->conexion->prepare($consulta);
+        $result->bindParam(":id",$id);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+    public function RecogerMotosGama($tipo){
+        $consulta="select id,nombre,imagen,precio,gama from moto where gama=:nombre";
+        $result=$this->conexion->prepare($consulta);
+        $result->bindParam(":nombre",$tipo);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+    public function ComprobarFecha($fecha, $usuario)
+    {
+        $consulta = "select * from reserva where fecha=:fecha AND usuario=:usuario";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(":fecha", $fecha);
+        $result->bindParam(":usuario", $usuario);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+    public function ComprobarReservas($fecha, $hora,$usuario) //poner aula
+    {
+        $consulta = "select * from reserva where fecha=:fecha AND hora=:hora AND usuario=:usuario";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(":fecha", $fecha);
+        $result->bindParam(":hora", $hora);
+        $result->bindParam(":usuario",$usuario);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_NUM);
+    }
+
+    /*La funcion ReservarAulas crea  una nueva  reserva con  los datos que se les pasa  */
+
+    public function ReservarReservas($fecha,  $hora, $usuario)
+    {
+        $consulta = "insert into reserva (fecha,hora,usuario) values(?,?,?)";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(1, $fecha);
+        $result->bindParam(2, $hora);
+        $result->bindParam(3, $usuario);
+        $result->execute();
+        return $result;
+    }
+
+    
+    public function EliminarReseva($fecha, $hora, $usuario)
+    {
+        $consulta = "delete from reserva where fecha=:fecha  AND hora=:hora AND usuario=:usuario";
+        $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':fecha', $fecha);
+        $result->bindParam(":hora", $hora);
+        $result->bindParam(":usuario", $usuario);
+        $result->execute();
+        return $result;
+    }
+
 }

@@ -23,6 +23,58 @@
             </div>
             <div class="col-2"></div>
         </div>
+        <div class=" row mt-5">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <table class="table table-sm table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Lunes</th>
+                        <th scope="col">A</th>
+                        <th scope="col">Viernes</th>
+                        <th scope="col">Sabado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Mañanas</td>
+                        <td></td>
+                        <td></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>09:00h</td>
+                        <td> A</td>
+                        <td>13:00h</td>
+                        <td>09:00h -- 13:00h </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Tardes</td>
+                        <td></td>
+                        <td></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>16:00h</td>
+                        <td> A</td>
+                        <td>21:00h</td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            </div>
+            <div class="col-2"></div>
+        </div>
         <div class="row mt-5 text-center">
             <div class="col-2"></div>
             <div class="col-3 contacto">

@@ -45,7 +45,7 @@ form{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 350px;
+    height: 400px;
     background-attachment: fixed;
     text-align: center;
   
@@ -74,4 +74,23 @@ form{
 .sub{
     width: 500px;
     height: 2px;
+}
+.imgMoto{
+    height: 175px;
+    width: 250px;
+}
+.imgMotoGama{
+    height: 220px; 
+    width: 325px;  
+}
+.imgMotoModelo{
+    height: 350px; 
+    width: 425px;  
+}
+.bordeCont{
+        padding: 3px 10px;
+        border: rgb(4, 97, 12) 5px solid;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      
 }

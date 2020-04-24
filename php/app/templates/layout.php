@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/proyectoFinal/interfaces/style.css">
+    <link rel="stylesheet" href="/proyectoFinal/interfaces/calendar11.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href=" https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css " rel=" stylesheet " />
     <title>Dan Florea</title>
@@ -62,11 +63,11 @@
                             <div class="dropdown-divider" id="marcas"></div>
                             <a class="dropdown-item bg-danger" href="#">GAMA</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.php?operacion=naked" id="naked">NAKED</a>
-                            <a class="dropdown-item" href="index.php?operacion=superSport" id="superSport">SUPER SPORT</a>
-                            <a class="dropdown-item" href="index.php?operacion=touring" id="touring">TOURING</a>
-                            <a class="dropdown-item" href="index.php?operacion=adventure" id="adventure">ADVENTURE</a>
-                            <a class="dropdown-item" href="index.php?operacion=custom" id="custom">CUSTOM</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Naked'" id="naked">NAKED</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='SuperSport'" id="superSport">SUPER SPORT</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Touring'" id="touring">TOURING</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Adventure'" id="adventure">ADVENTURE</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Custom'" id="custom">CUSTOM</a>
 
                         </div>
                     </li>
@@ -96,7 +97,8 @@
     <script src="/proyectoFinal/javaScript/formAlt.js"></script>
     <script src="/proyectoFinal/javaScript/login.js"></script>
     <script src="/proyectoFinal/javaScript/Contactanos.js"></script>
+    <script src="/proyectoFinal/javaScript/CalendarioUser.js"></script>
     <script src="/proyectoFinal/javaScript/MostrarErroresSubirImagenes.js"></script>
 </body>
 
-</html>
+</html>            

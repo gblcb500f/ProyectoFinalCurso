@@ -1,6 +1,4 @@
 <?php ob_start() ?>
-
-
 <div class="content"  >
    <div id="CambioPaginaModMarcas">
       <div class="row" >
@@ -37,5 +35,4 @@
 </div>
 
 <?php $contenido = ob_get_clean() ?>
-
-c
+<?php include 'layoutAdmin.php'; ?>

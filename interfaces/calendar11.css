@@ -15,7 +15,7 @@
 /*  Events display */
 .events-container {
     overflow-y: scroll;
-    height: 95%;
+    height: 100%;
     width: 420px ; 
     font: 13px Helvetica, Arial, sans-serif; 
     display: inline-block; 

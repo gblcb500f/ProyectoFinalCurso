@@ -71,6 +71,7 @@ function RutaOperacionesAdmin() {
 }
 //Esta funcion sirve para poder eliminar los alerts de bootstrap 
 function CerrarAviso() {
+  
     $("#CerrarAviso").bind('click', function () {
         $("#MensajeAviso").remove();
     });
