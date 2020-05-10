@@ -63,11 +63,11 @@
                             <div class="dropdown-divider" id="marcas"></div>
                             <a class="dropdown-item bg-danger" href="#">GAMA</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Naked'" id="naked">NAKED</a>
-                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='SuperSport'" id="superSport">SUPER SPORT</a>
-                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Touring'" id="touring">TOURING</a>
-                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Adventure'" id="adventure">ADVENTURE</a>
-                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo='Custom'" id="custom">CUSTOM</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo=Naked" id="naked">NAKED</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo=SuperSport" id="superSport">SUPER SPORT</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo=Touring" id="touring">TOURING</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo=Adventure" id="adventure">ADVENTURE</a>
+                            <a class="dropdown-item" href="index.php?operacion=MostrarTodosLosModelosEnGama&tipo=Custom" id="custom">CUSTOM</a>
 
                         </div>
                     </li>

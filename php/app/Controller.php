@@ -891,7 +891,7 @@ class Controller
     }
     public function MostrarTodosLosModelosEnGama(){
         $m=new Model();
-      /*   $tipo=recoge("tipo"); */ $tipo="Naked";
+        $tipo=recoge("tipo");
         $BDatos=$m->RecogerMotosGama($tipo);
         require __DIR__ . '/templates/MostrarTodosLosModelosEnGama.php';
     }
