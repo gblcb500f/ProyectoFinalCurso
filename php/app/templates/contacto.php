@@ -154,7 +154,7 @@
                         <div class="col-md-2 mb-2"></div>
                         <div class="col-md-5 mb-2">
                             <label>Escriba la duda que tenga:</label>
-                            <textarea name="texto" rows="6" cols="95" id="texto"></textarea>
+                            <textarea name="texto" rows="6" cols="55" id="texto"></textarea>
                         </div>
                         <div class="col-md-5 mb-2"></div>
                     </div>

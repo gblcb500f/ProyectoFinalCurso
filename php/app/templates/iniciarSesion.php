@@ -29,13 +29,10 @@
                 <label class="form-check-label" for="exampleCheck1">Remember me</label>
             </div>
             <div class="d-flex mt-5">
-                <div class="col-2">
+                <div class="col-6">
                     <input class="btn btn-danger" type="submit" name="iniciar" value="Entrar">
                 </div>
-                <div class="col-6 text-center">
-                    <a href="ForgotPass.html" class="btn btn-dark">Te has olvidado de tu contraseña?</a>
-                </div>
-                <div class="col-2">
+                <div class=" col-6">
                     <a href="index.php?operacion=MostrarformAlt" class="btn btn-danger">Registrarse</a>
                 </div>
             </div>

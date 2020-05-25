@@ -1,9 +1,9 @@
 <?php ob_start() ?>
 <!-- Esta pagina se la devolvemos al cliente que contendra toda la informacion de las aulas con la informacion que queremos inplementar en el html -->
 
-<div class="content">
+<div class="content ">
 
-    <div class="alert bg-warning" role="alert" id="MensajeAviso">
+    <div class="alert bg-warning col-12  " role="alert" id="MensajeAviso">
         <p class="text-dark">Muy buenas <?php echo ucfirst($_SESSION['usuario']); ?>.
             <br>Usted tiene unos ciertos permisos acerca de la pagina, que le permitira configurar el funcionamiento de ella.
             <br>Le pedimos porfavor que antes de realizar cualquier cambio detenidamente piense en ello ya que afecta no
@@ -13,8 +13,8 @@
         </div>
     </div>
     <div>
-        <div class="row">
-            <div class="mt-5 col">
+        <div class="row ">
+            <div class="mt-5 col-12 ">
                 <h1 class="text-center ">Pagina principal del Administador </h1>
                 <div class="container mt-5 ">
                     <h3>Las operaciones a relizar son estas:</h3>

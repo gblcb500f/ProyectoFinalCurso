@@ -46,7 +46,7 @@ function MostrarConcesionario() {
         if ($("#CA")[0]) {
             $("#concesionario").empty();
         } else {
-            $("#concesionario").html('<div class="col-2" id="CA"></div><div class="col-8"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1540.0131601307462!2d-0.3987187873238644!3d39.46873409757977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f6b8c4e48e5%3A0xb5053ab7dfdb897f!2sAv.%20del%20Cid%2C%2062D%2C%2046018%20Valencia!5e0!3m2!1ses!2ses!4v1585226027802!5m2!1ses!2ses" width="900" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div><div class="col-2"></div>');
+            $("#concesionario").html('<div class="col-md-6 col-1" ></div><div class="col-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1540.0131601307462!2d-0.3987187873238644!3d39.46873409757977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f6b8c4e48e5%3A0xb5053ab7dfdb897f!2sAv.%20del%20Cid%2C%2062D%2C%2046018%20Valencia!5e0!3m2!1ses!2ses!4v1585226027802!5m2!1ses!2ses" width="400" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div><div class="col-2"></div>');
         }
 
     });

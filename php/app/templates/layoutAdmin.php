@@ -30,7 +30,7 @@
                     <?php if (isset($_SESSION['usuario'])) { ?>
                         <div class="row">
                             <div class="col col-9">
-                                <ul class="navbar-nav mr-auto mt-2 my-lg-0 btn btn-dark btn-sm ">
+                                <ul class="navbar-nav mr-auto mt-2 my-lg-0 btn btn-dark ">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo ucfirst($_SESSION['usuario']); ?>
                                         </a>
@@ -50,8 +50,13 @@
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg navbar-dark  justify-content-around" style="background-color: #000000;">
-            <div class="collapse navbar-collapse justify-content-around">
+        <nav class="navbar navbar-expand-md navbar-dark  justify-content-around" style="background-color: #000000;">
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <button class="navbar-toggler p2  bd-highlight" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon "></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto " id="Activar">
                     <li class="nav-item active" id="home">
                         <a class="nav-link" href="index.php?operacion=homeAdmin">HOME</a>

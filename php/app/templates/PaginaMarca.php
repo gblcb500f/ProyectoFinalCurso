@@ -27,7 +27,7 @@
                 $palabra = explode('/', $ruta);
                 $p = end($palabra);
                 if ($n < 3) {  ?>
-                <div class="col col-3 modelo" modelo="<?php echo $BDMarca[$i][0];?>">
+                <div class="col col-2 col-md-3 modelo" modelo="<?php echo $BDMarca[$i][0];?>">
                         <img class="imgMoto" src="/proyectoFinal/imagenes/producto/<?php echo $p; ?>" alt="">
                         <p class="mt-3"><?php echo $BDMarca[$i][1]; ?></p>
                     </div>
